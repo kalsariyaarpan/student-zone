@@ -1,0 +1,166 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* Background */
+body {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #1c1c1e, #313133);
+}
+
+/* 🎯 MAIN AUTH BOX (same for login & register) */
+.auth-box {
+  width: 420px;
+  background: #222;
+  padding: 40px 35px;
+  border-radius: 20px;
+  box-shadow: 0 0 35px rgba(0, 255, 234, 0.12);
+  animation: slideIn 0.6s ease;
+  position: relative;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-35px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Title */
+.auth-box h2 {
+  text-align: center;
+  color: #10a3d7;
+  margin-bottom: 25px;
+  font-size: 26px;
+}
+
+/* Input label */
+.auth-input label {
+  color: #ccc;
+  font-size: 14px;
+  display: block;
+  margin-bottom: 15px;
+}
+
+/* Inputs */
+.auth-input input {
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #333;
+  color: #fff;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+
+/* Same focus for all */
+.auth-input input:focus {
+  outline: 2px solid #10a3d7;
+}
+
+/* Special 2-column layout used in register */
+.two-inputs {
+  display: flex;
+  gap: 12px;
+}
+
+/* Button */
+.auth-btn {
+
+  width: 100%;
+  padding: 12px;
+  background: #10a3d7;
+  color: #1c1c1e;
+  border: none;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: 0.25s ease;
+}
+
+.auth-btn:hover {
+  background: #0d8bb7;
+}
+
+/* Links text */
+.auth-footer {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.auth-footer p,
+.auth-footer a {
+  color: #10a3d7;
+  font-size: 14px;
+}
+
+.auth-footer a:hover {
+  text-decoration: underline;
+}
+
+
+.two-inputs {
+  display: flex;
+  gap: 12px;
+  width: 100%;
+}
+
+.two-inputs input {
+  width: 100%;
+  padding: 12px 14px;
+  border: none;
+  border-radius: 10px;
+  background: #333;
+  color: #fff;
+  font-size: 15px;
+}
+
+
+/* Floating blue glow circle */
+.floating-glow {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: #10a3d7;
+  border-radius: 50%;
+  top: -35px;
+  right: -35px;
+  filter: blur(90px);
+  z-index: -1;
+}
+  
+.social-login {
+  margin-top: 15px;
+}
+
+.google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #444;
+  background: #1e1e1e;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.google-btn img {
+  width: 18px;
+}

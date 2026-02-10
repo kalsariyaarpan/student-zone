@@ -1,0 +1,357 @@
+/* Simple dark theme overrides applied when body has class 'dark' */
+
+body.dark {
+  background-color: #121212;
+  color: #e2e2e2;
+}
+
+body.dark a {
+  color: #9ecbff;
+}
+
+body.dark header,
+body.dark footer,
+body.dark .navbar,
+body.dark .navmenu,
+body.dark .dropdown-menu {
+  background-color: #1a1a1a !important;
+  color: #e2e2e2 !important;
+}
+
+body.dark .card,
+body.dark .list-group,
+body.dark .modal-content,
+body.dark .offcanvas,
+body.dark .accordion-item,
+body.dark .form-control,
+body.dark .form-select {
+  background-color: #1e1e1e !important;
+  color: #e2e2e2 !important;
+  border-color: #333 !important;
+}
+
+body.dark .btn,
+body.dark .btn-primary,
+body.dark .btn-secondary,
+body.dark .btn-outline-secondary {
+  border-color: #3a3a3a;
+}
+
+body.dark .text-muted { color: #b5b5b5 !important; }
+
+/* Optional helpers if the site uses these utility classes */
+body.dark .light-background { background-color: #1e1e1e !important; }
+body.dark .dark-background { background-color: #121212 !important; }
+
+
+ 
+
+/* Features page / section-specific dark-theme tweaks */
+body.dark .section.bg-dark {
+  background-color: #0b1220;
+  color: #e6eef8;
+}
+
+body.dark .section.bg-dark .lead,
+body.dark .section.bg-dark .text-muted {
+  color: #b5b5b5 !important;
+}
+
+body.dark .card.h-100,
+body.dark .card.h-100 .card-body {
+  background-color: #16191c !important;
+  border-color: #222 !important;
+  color: #e6eef8 !important;
+}
+
+body.dark .card.h-100 .bi,
+body.dark .bi {
+  color: #9ecbff !important;
+}
+
+body.dark .badge.text-bg-primary {
+  background-color: #0d6efd !important;
+  color: #ffffff !important;
+}
+
+body.dark .btn-primary {
+  background-color: #0d6efd !important;
+  border-color: #0a58ca !important;
+  color: #ffffff !important;
+}
+
+body.dark .text-primary { color: #0d6efd !important; }
+
+
+
+/* ===============================
+   ROOT THEME VARIABLES
+================================ */
+:root {
+  --bg-main: #020617;
+  --bg-panel: rgba(8, 15, 40, 0.85);
+  --bg-card: linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015));
+  --border-glow: rgba(56,189,248,0.35);
+
+  --primary: #38bdf8;
+  --primary-strong: #0ea5e9;
+  --text-main: #e5e7eb;
+  --text-muted: #9aa4bf;
+}
+
+/* ===============================
+   GLOBAL BASE
+================================ */
+body {
+  background: radial-gradient(circle at top, #020617, #000312 70%);
+  color: var(--text-main);
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.section {
+  padding: 90px 0;
+}
+
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-primary {
+  color: var(--primary) !important;
+}
+
+/* ===============================
+   PAGE HEADER (FEATURES / FAQ)
+================================ */
+.section.bg-dark {
+  background:
+    radial-gradient(circle at center, rgba(56,189,248,0.15), transparent 65%),
+    var(--bg-main);
+}
+
+.section h1,
+.section h2 {
+  letter-spacing: -0.02em;
+}
+
+/* ===============================
+   BADGES
+================================ */
+.badge {
+  background: rgba(56,189,248,0.15);
+  border: 1px solid var(--border-glow);
+  color: var(--primary);
+  padding: 8px 14px;
+  letter-spacing: 1px;
+  border-radius: 999px;
+  backdrop-filter: blur(10px);
+}
+
+/* ===============================
+   FEATURE CARDS
+================================ */
+.card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.06);
+  box-shadow:
+    0 10px 40px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  transition: all 0.35s ease;
+}
+
+.card-body {
+  padding: 40px 32px;
+}
+
+.card h5 {
+  font-weight: 600;
+  margin-top: 18px;
+}
+
+.card i {
+  filter: drop-shadow(0 0 12px rgba(56,189,248,0.6));
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow:
+    0 20px 60px rgba(56,189,248,0.25),
+    inset 0 0 0 1px rgba(56,189,248,0.25);
+}
+
+/* ===============================
+   BUTTONS
+================================ */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+  border: none;
+  border-radius: 999px;
+  padding: 14px 36px;
+  font-weight: 600;
+  box-shadow: 0 14px 40px rgba(56,189,248,0.45);
+  transition: all 0.25s ease;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 60px rgba(56,189,248,0.6);
+}
+
+.btn-outline-light {
+  border-radius: 999px;
+  padding: 14px 32px;
+  border-color: rgba(255,255,255,0.4);
+}
+
+/* ===============================
+   CTA SECTION
+================================ */
+.section:last-of-type {
+  padding-bottom: 120px;
+}
+
+.section:last-of-type h2 {
+  font-weight: 700;
+}
+
+.section:last-of-type p {
+  max-width: 520px;
+  margin: 0 auto;
+}
+
+/* ===============================
+   RESPONSIVE FIX
+================================ */
+@media (max-width: 768px) {
+  .section {
+    padding: 64px 0;
+  }
+
+  .card-body {
+    padding: 28px 22px;
+  }
+}
+
+
+/* ===============================
+   FAQ – PREMIUM STYLING
+================================ */
+
+.faq-section {
+  background:
+    radial-gradient(circle at center, rgba(56,189,248,0.08), transparent 65%);
+}
+
+/* Accordion container */
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+/* FAQ card */
+.faq-item {
+  background: linear-gradient(
+    180deg,
+    rgba(255,255,255,0.04),
+    rgba(255,255,255,0.015)
+  );
+  border-radius: 18px;
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px);
+  box-shadow:
+    0 12px 40px rgba(0,0,0,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.04);
+  overflow: hidden;
+  transition: all 0.35s ease;
+}
+
+/* Hover glow */
+.faq-item:hover {
+  transform: translateY(-4px);
+  box-shadow:
+    0 20px 60px rgba(56,189,248,0.25),
+    inset 0 0 0 1px rgba(56,189,248,0.25);
+}
+
+/* Button */
+.faq-btn {
+  background: transparent;
+  color: #e5e7eb;
+  font-weight: 600;
+  padding: 22px 26px;
+  border: none;
+  box-shadow: none;
+}
+
+.faq-btn::after {
+  filter: invert(1);
+}
+
+/* Icon */
+.faq-icon {
+  margin-right: 14px;
+  color: #38bdf8;
+  filter: drop-shadow(0 0 8px rgba(56,189,248,0.8));
+}
+
+/* Active state */
+.faq-btn:not(.collapsed) {
+  color: #38bdf8;
+  background: rgba(56,189,248,0.08);
+}
+
+/* Answer */
+.faq-body {
+  padding: 22px 26px 28px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #9aa4bf;
+}
+
+/* Remove bootstrap default borders */
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .faq-btn {
+    padding: 18px 20px;
+  }
+
+  .faq-body {
+    padding: 18px 20px 22px;
+  }
+}
+
+
+.form-label{
+  color: white;
+}
+/* ===== PAGE HEADING BLUE BUTTON ===== */
+.section .badge {
+  display: inline-block;
+  padding: 10px 26px;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  border-radius: 999px;
+  box-shadow:
+    0 8px 25px rgba(56,189,248,0.45),
+    inset 0 0 0 1px rgba(255,255,255,0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* subtle hover (optional but premium) */
+.section .badge:hover {
+  transform: translateY(-1px);
+  box-shadow:
+    0 12px 35px rgba(56,189,248,0.6),
+    inset 0 0 0 1px rgba(255,255,255,0.25);
+}
