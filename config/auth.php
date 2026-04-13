@@ -65,12 +65,13 @@ return [
             'model' => App\Models\RegisterUser::class,
         ],
 
+        
         // 'users' => [
         //     'driver' => 'database',
         //     'table' => 'users',
         // ],
     ],
-
+    
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords

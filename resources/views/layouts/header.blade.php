@@ -3,7 +3,7 @@
   <!-- LEFT: LOGO -->
   <div class="header-left">
     <a href="{{ url('/') }}" class="logo">
-      <img src="{{ asset('assets/img/mainlogo.png') }}" alt="Student Zone Logo">
+      <img src="{{ asset('assets/img/transparent-logo-2.png') }}" alt="Student Zone Logo">
     </a>
   </div>
 
@@ -245,26 +245,73 @@ function clearLoginAnim() {
   top: 0;
   z-index: 997;
 }
-
-/* ===============================
-   LOGO
-================================ */
+/* =======================
+   HEADER LEFT (LOGO)
+======================= */
 
 .header-left {
   display: flex;
   align-items: center;
 }
 
+
+/* =======================
+   HEADER LEFT (LOGO)
+======================= */
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+/* Logo Image */
 .header-left .logo img {
-  max-height: 42px;
-  transition: transform 0.3s ease, filter 0.3s ease;
+  height: 60px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+
+  /* Smooth animation */
+  transition: all 0.3s ease;
 }
 
+/* Hover Effect */
 .header-left .logo:hover img {
-  transform: scale(1.05);
-  filter: drop-shadow(0 0 10px rgba(56,189,248,0.6));
+  transform: scale(1.08);
+
+  /* Glow effect (perfect for dark background) */
+  filter: drop-shadow(0 0 8px rgba(56,189,248,0.6))
+          drop-shadow(0 0 15px rgba(56,189,248,0.4));
 }
 
+/* =======================
+   OPTIONAL: LOGO TEXT STYLE (if needed)
+======================= */
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+}
+
+/* =======================
+   RESPONSIVE DESIGN
+======================= */
+
+/* Tablet */
+@media (max-width: 992px) {
+  .header-left .logo img {
+    height: 50px;
+  }
+}
+
+/* Mobile */
+@media (max-width: 576px) {
+  .header-left .logo img {
+    height: 42px;
+  }
+}
 /* ===============================
    CENTER AREA
 ================================ */

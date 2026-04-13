@@ -38,17 +38,16 @@
                 <span class="value">{{ $docCount ?? 0 }}</span>
                 <span class="label">Documents Uploaded</span>
             </div>
-            <div class="stat clickable">
+            <div class="stat clickable" onclick="handleStatClick({{ $qrCount ?? 0 }}, 'QR Scans')">
                 <span class="value">{{ $qrCount ?? 0 }}</span>
                 <span class="label">QR Scans</span>
             </div>
-            <div class="stat clickable" onclick="window.location.href='{{ route('notes.index') }}'">
-    <span class="value">{{ $notesCount ?? 0 }}</span>
-    <span class="label">Notes Created</span>
-</div>
-
-
-            <div class="stat clickable">
+            <div class="stat clickable" onclick="handleStatClick({{ $notesCount ?? 0 }}, 'Notes Created')">
+                {{-- <div class="stat clickable" onclick="handleStatClick({{ $notesCount ?? 0 }}, 'Notes Created')"> --}}
+                <span class="value">{{ $notesCount ?? 0 }}</span>   
+                <span class="label">Notes Created</span>
+            </div>
+            <div class="stat clickable" onclick="handleStatClick({{ $tasksCount ?? 0 }}, 'Tasks Completed')">
                 <span class="value">{{ $tasksCount ?? 0 }}</span>
                 <span class="label">Tasks Completed</span>
             </div>
@@ -100,6 +99,7 @@
                 <label>Username</label>
                 <input type="text" name="username" value="{{ Auth::user()->username }}">
 
+                
                 <label>Upload Profile Photo</label>
                 <input type="file" name="profile_photo">
 
@@ -134,6 +134,18 @@
         </div>
     </div>
 
+    <!-- =======================
+         COMING SOON MODAL
+    ======================== -->
+    <div class="modal" id="comingSoonModal" style="display: none;">
+        <div class="modal-box coming-soon-box">
+            <h3>Coming Soon</h3>
+            <p id="comingSoonText" style="
+    color: aliceblue;">This feature is coming soon.</p>
+            <button class="btn-primary" onclick="closeComingSoon()">Okay</button>
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -150,6 +162,26 @@ function closePassword() {
     document.getElementById("passwordModal").style.display = "none";
 }
 
+function showComingSoonModal(message) {
+    var modal = document.getElementById('comingSoonModal');
+    var text = document.getElementById('comingSoonText');
+    text.textContent = message;
+    modal.style.display = 'flex';
+}
+
+function closeComingSoon() {
+    document.getElementById('comingSoonModal').style.display = 'none';
+}
+
+function handleStatClick(count, label, route) {
+    if (count === 0) {
+        showComingSoonModal('Service coming soon for ' + label + '.');
+    } else if (route) {
+        window.location.href = route;
+    } else {
+        showComingSoonModal('Service coming soon for ' + label + '.');
+    }
+}
 
 function goToDocuments() {
     window.location.href = "{{ route('resources.select') }}";
@@ -165,6 +197,30 @@ function goToDocuments() {
 .stat.clickable:hover {
   transform: translateY(-6px);
   box-shadow: 0 15px 40px rgba(56,189,248,0.35);
+}
+
+.modal#comingSoonModal {
+  align-items: center;
+  justify-content: center;
+}
+
+.coming-soon-box {
+  max-width: 380px;
+  padding: 28px 26px;
+  text-align: center;
+  border-radius: 20px;
+  box-shadow: 0 24px 70px rgba(15, 23, 42, 0.18);
+}
+
+.coming-soon-box h3 {
+  margin-bottom: 14px;
+  color: #1e3a8a;
+}
+
+.coming-soon-box p {
+  margin-bottom: 20px;
+  color: #334155;
+  line-height: 1.6;
 }
 
 </style>
