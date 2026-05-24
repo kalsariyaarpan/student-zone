@@ -5484,40 +5484,39 @@ section,
     margin-top: 25px;
 }
 
-.btn-save   {
-    background: linear-gradient(135deg, #38bdf8, #6366f1);
+.btn-save {
+    background: linear-gradient(135deg, #38bdf8, #0ea5e9);
     color: #fff;
-    padding: 12px 22px;
-    border-radius: 10px;
+    padding: 12px 24px;
+    border-radius: 999px;
     font-weight: 700;
     border: none;
     cursor: pointer;
-    transition: 0.25s;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    box-shadow: 0 14px 40px rgba(56,189,248,0.35);
 }
 
 .btn-save:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(56,189,248,0.45);
+    background: linear-gradient(135deg, #7dd3fc, #0ea5e9);
+    box-shadow: 0 20px 60px rgba(56,189,248,0.45);
 }
 
 .btn-cancel {
-  background: linear-gradient(135deg, #38bdf8, #6366f1);
-    color: #fff;
-    padding: 12px 22px;
-    border-radius: 10px;
+    background: #475569;
+    color: #f8fafc;
+    padding: 12px 24px;
+    border-radius: 999px;
     font-weight: 700;
     border: none;
     cursor: pointer;
-    transition: 0.25s;
-
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+    box-shadow: 0 14px 30px rgba(71,85,105,0.25);
 }
 
 .btn-cancel:hover {
-   transform: translateY(-2px);
-    box-shadow: 0 10px 30px rgba(56,189,248,0.45);
- 
-  color: #fff;
-    /* text-decoration: underline; */
+    transform: translateY(-1px);
+    background: #64748b;
 }
 
 /* Animation */

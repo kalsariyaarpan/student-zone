@@ -89,6 +89,7 @@
       <div class="step active" id="step1">
 
       <h1>Choose Your Field</h1>
+      <div id="fieldAlert" class="form-alert" role="alert" style="display:none;"></div>
       <div id="keyboardHint" class="keyboard-hint hidden" aria-live="polite">
         <small style="opacity:.6">Use ← → keys to navigate steps</small>
         {{-- <button type="button" id="dismissHint" class="hint-close">Got it</button> --}}
@@ -132,13 +133,13 @@
 
           <div id="newSubjectDiv" class="hidden">
             <input type="text" id="newSubject" placeholder="Enter new subject name">
-            <button type="button" onclick="addSubject()">Add Subject</button>
+            <button type="button" class="auth-btn" onclick="addSubject()">Add Subject</button>
           </div>
         </div>
 
         <div class="BtnControl">
-          <button type="button" onclick="goToStep(1)">Previous</button>
-        <button type="button" onclick="goToStep(3)">Next</button>
+          <button type="button" class="auth-btn btn-secondary" onclick="goToStep(1)">Previous</button>
+          <button type="button" class="auth-btn next-btn" onclick="goToStep(3)">Next</button>
         </div>
         
       </div>
@@ -187,8 +188,8 @@
 </div>
 
       <div class="BtnControl">
-        <button type="button" onclick="goToStep(2)">Previous</button>
-      <button type="submit">Upload</button>
+        <button type="button" class="auth-btn btn-secondary" onclick="goToStep(2)">Previous</button>
+        <button type="submit" class="auth-btn">Upload</button>
       </div>
       
     </div>
@@ -258,33 +259,48 @@ function showStep(index) {
 
 
 
+function showFieldAlert(message) {
+  const alertBox = document.getElementById("fieldAlert");
+  if (!alertBox) return;
+  alertBox.textContent = message;
+  alertBox.classList.add("show");
+  alertBox.style.display = "block";
+  setTimeout(() => {
+    alertBox.classList.remove("show");
+    alertBox.style.display = "none";
+  }, 4500);
+}
+
   window.goToStep = function(step) {
-    if (validateStep(currentStep)) {
+    const visibleIndex = Array.from(steps).findIndex(s => s.classList.contains('active'));
+    const toValidate = visibleIndex === -1 ? currentStep : visibleIndex;
+
+    if (validateStep(toValidate)) {
       showStep(step - 1);
     } else {
-      alert("Please complete all required fields.");
+      showFieldAlert("Please complete all required fields.");
     }
   };
 
  function validateStep(stepIndex) {
   if (stepIndex === 0) {
     if (!fieldInput.value) {
-      alert("Please select a field to continue.");
+      showFieldAlert("Please select a field to continue.");
       return false;
     }
   }
 
   if (stepIndex === 1) {
     if (!yearSelect.value) {
-      alert("Please select the year.");
+      showFieldAlert("Please select the year.");
       return false;
     }
     if (!semesterSelect.value) {
-      alert("Please select the semester.");
+      showFieldAlert("Please select the semester.");
       return false;
     }
     if (!subjectSelect.value) {
-      alert("Please select the subject.");
+      showFieldAlert("Please select the subject.");
       return false;
     }
   }
@@ -388,7 +404,10 @@ function showStep(index) {
 
   window.addSubject = function () {
     const newSub = document.getElementById("newSubject").value.trim();
-    if (!newSub) return alert("Enter subject name");
+    if (!newSub) {
+      showFieldAlert("Enter subject name");
+      return;
+    }
 
     subjectSelect.innerHTML += `<option value="${newSub}">${newSub}</option>`;
     subjectSelect.value = newSub;

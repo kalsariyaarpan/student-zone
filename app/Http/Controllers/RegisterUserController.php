@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 use App\Models\User;
 
 
@@ -66,6 +67,39 @@ class RegisterUserController extends Controller
             $user->save();
 
             return back()->with('success', 'Theme updated successfully!');
+        }
+
+        public function updateDetails(Request $request)
+        {
+            $user = Auth::user();
+            if (!$user) {
+                return back()->with('error', 'User not found.');
+            }
+
+            $request->validate([
+                'username' => [
+                    'required',
+                    'string',
+                    'max:50',
+                    Rule::unique('register_users')->ignore($user->id),
+                ],
+                'first_name' => 'required|string|max:50',
+                'last_name' => 'required|string|max:50',
+                'email' => [
+                    'required',
+                    'email',
+                    Rule::unique('register_users')->ignore($user->id),
+                ],
+            ]);
+
+            $user->update([
+                'username' => $request->input('username'),
+                'first_name' => $request->input('first_name'),
+                'last_name' => $request->input('last_name'),
+                'email' => $request->input('email'),
+            ]);
+
+            return back()->with('success', 'Account details updated successfully!');
         }
    
         /**

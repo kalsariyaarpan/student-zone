@@ -104,7 +104,7 @@
                 <input type="file" name="profile_photo">
 
                 <button class="btn-primary">Save</button>
-                <button type="button" class="btn-close" onclick="closeEdit()">Cancel</button>
+                <button type="button" class="btn-secondary" onclick="closeEdit()">Cancel</button>
             </form>
         </div>
     </div>
@@ -129,7 +129,7 @@
                 <input type="password" name="password_confirmation">
 
                 <button class="btn-primary">Update</button>
-                <button type="button" class="btn-close" onclick="closePassword()">Cancel</button>
+                <button type="button" class="btn-secondary" onclick="closePassword()">Cancel</button>
             </form>
         </div>
     </div>
@@ -221,6 +221,76 @@ function goToDocuments() {
   margin-bottom: 20px;
   color: #334155;
   line-height: 1.6;
+}
+
+.profile-actions button,
+.modal-box button {
+  min-width: 130px;
+  padding: 0.95rem 1.5rem;
+  border-radius: 999px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.profile-actions button {
+  box-shadow: 0 18px 40px rgba(56, 189, 248, 0.22);
+}
+
+.profile-actions .btn-primary,
+.modal-box .btn-primary {
+  background: linear-gradient(135deg, #38bdf8, #0ea5e9);
+  color: #ffffff;
+  border: none;
+}
+
+.profile-actions .btn-primary:hover,
+.modal-box .btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 22px 54px rgba(56, 189, 248, 0.3);
+}
+
+.profile-actions .btn-secondary,
+.modal-box .btn-secondary {
+  background: #475569;
+  color: #f8fafc;
+  border: none;
+}
+
+.profile-actions .btn-secondary:hover,
+.modal-box .btn-secondary:hover {
+  background: #64748b;
+}
+
+.profile-actions .btn-danger,
+.modal-box .btn-danger {
+  background: #ef4444;
+  color: #ffffff;
+  border: none;
+}
+
+.profile-actions .btn-danger:hover,
+.modal-box .btn-danger:hover {
+  background: #dc2626;
+}
+
+.btn-close {
+  background: rgba(148, 163, 184, 0.16);
+  color: #e2e8f0;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.05);
+}
+
+.btn-close:hover {
+  background: rgba(148, 163, 184, 0.28);
+}
+
+.profile-actions button + button {
+  margin-left: 0.9rem;
+}
+
+.modal-box .btn-close {
+  margin: 0;
 }
 
 </style>

@@ -33,13 +33,7 @@ body {
   border-radius: 20px;
   width: 95%;
   max-width: 850px;
-  margin: 0 auto 25px;
-  box-shadow: 0 0 35px rgba(0, 255, 234, 0.12);
-}
-
-/* STEP HANDLING */
-.step-section {
-  display: none;
+  margin: 0 auto 18px;
 }
 
 .step-section.active {
@@ -87,6 +81,20 @@ select:focus, input:focus {
 
 .back-btn:hover {
   background: #555;
+}
+
+.form-alert {
+  display: none;
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid #f87171;
+  color: #fee2e2;
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 18px;
+}
+
+.form-alert.show {
+  display: block;
 }
 
 /* RESOURCE TYPE BUTTONS */
@@ -146,6 +154,7 @@ select:focus, input:focus {
 
 <div class="main-box step-section active" id="step1">
     <h2 class="page-title">🎓 View Academic Resources</h2>
+    <div id="viewAlert" class="form-alert" style="display:none;" role="alert"></div>
 
     <div class="row">
         <div class="col-md-3">
@@ -245,11 +254,23 @@ Mathematics I
 
 
     <script>
-   function goStep2() {
+   function showViewAlert(message) {
+    const alertBox = document.getElementById("viewAlert");
+    if (!alertBox) return;
+    alertBox.textContent = message;
+    alertBox.classList.add("show");
+    alertBox.style.display = "block";
+    setTimeout(() => {
+        alertBox.classList.remove("show");
+        alertBox.style.display = "none";
+    }, 4500);
+}
+
+function goStep2() {
     const ids = ["field", "year", "semester", "subject"];
     for (let id of ids) {
         if (!document.getElementById(id).value) {
-            alert("Please complete all fields.");
+            showViewAlert("Please complete all fields.");
             return;
         }
     }
