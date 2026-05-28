@@ -1,3 +1,25 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Smooth Scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Enhanced scroll performance */
+body {
+    scroll-behavior: smooth;
+}
+
+/* Smooth scroll for links */
+a[href^="#"] {
+    scroll-behavior: smooth;
+}
+
+/* Optional: Add transition to scroll-triggered elements */
+@supports (scroll-behavior: smooth) {
+    html {
+        scroll-behavior: smooth;
+    }
+}

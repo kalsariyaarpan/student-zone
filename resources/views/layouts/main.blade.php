@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="utf-8">
   {{-- <meta content="width=device-width, initial-scale=1.0" name="viewport"> --}}
@@ -17,7 +17,7 @@
 </head>
 <link rel="stylesheet" href="{{ asset('assets/css/theme.css') }}">
 
-<body class="index-page {{ auth()->check() ? (auth()->user()->theme ?? 'light') : 'light' }}">
+<body class="index-page {{ auth()->check() ? (auth()->user()->theme ?? 'light') : 'light' }}" class="scroll-smooth">
     
     @include('layouts.header')
     <main class="main">

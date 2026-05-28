@@ -10,6 +10,10 @@ export default {
                 success: colors.green,
                 warning: colors.yellow,
             },
+            scrollBehavior: ['responsive'],
         },
+    },
+    variants: {
+        scrollBehavior: ['responsive'],
     },
 }

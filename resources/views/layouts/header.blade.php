@@ -33,7 +33,7 @@
 
       <li><a href="{{ route('explore.resources') }}">Explore</a></li>
       <li><a href="{{ route('resources.view') }}">Resources</a></li>
-      <li><a href="{{ route('fields.upload.store') }}">Upload</a></li>
+      <li><a href="{{ route('fields.upload') }}">Upload</a></li>
 
     </ul>
   </nav>

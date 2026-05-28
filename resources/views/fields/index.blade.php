@@ -82,6 +82,8 @@
       enctype="multipart/form-data">
   @csrf
 
+  <div id="fieldAlert" class="form-alert" role="alert" style="display:none;"></div>
+
     
     {{-- Step 1: Choose Field --}}
  
@@ -89,7 +91,6 @@
       <div class="step active" id="step1">
 
       <h1>Choose Your Field</h1>
-      <div id="fieldAlert" class="form-alert" role="alert" style="display:none;"></div>
       <div id="keyboardHint" class="keyboard-hint hidden" aria-live="polite">
         <small style="opacity:.6">Use ← → keys to navigate steps</small>
         {{-- <button type="button" id="dismissHint" class="hint-close">Got it</button> --}}
@@ -259,13 +260,22 @@ function showStep(index) {
 
 
 
-function showFieldAlert(message) {
+function showFieldAlert(message, field) {
   const alertBox = document.getElementById("fieldAlert");
   if (!alertBox) return;
+
+  if (field && field.classList) {
+    field.classList.add("input-error");
+  }
+
   alertBox.textContent = message;
   alertBox.classList.add("show");
   alertBox.style.display = "block";
+
   setTimeout(() => {
+    if (field && field.classList) {
+      field.classList.remove("input-error");
+    }
     alertBox.classList.remove("show");
     alertBox.style.display = "none";
   }, 4500);
@@ -274,6 +284,11 @@ function showFieldAlert(message) {
   window.goToStep = function(step) {
     const visibleIndex = Array.from(steps).findIndex(s => s.classList.contains('active'));
     const toValidate = visibleIndex === -1 ? currentStep : visibleIndex;
+
+    if (step - 1 < toValidate) {
+      showStep(step - 1);
+      return;
+    }
 
     if (validateStep(toValidate)) {
       showStep(step - 1);
@@ -292,15 +307,43 @@ function showFieldAlert(message) {
 
   if (stepIndex === 1) {
     if (!yearSelect.value) {
-      showFieldAlert("Please select the year.");
+      showFieldAlert("Please select the year.", yearSelect);
       return false;
     }
     if (!semesterSelect.value) {
-      showFieldAlert("Please select the semester.");
+      showFieldAlert("Please select the semester.", semesterSelect);
       return false;
     }
     if (!subjectSelect.value) {
-      showFieldAlert("Please select the subject.");
+      showFieldAlert("Please select the subject.", subjectSelect);
+      return false;
+    }
+    if (subjectSelect.value === "new") {
+      const newSubjectInput = document.getElementById("newSubject");
+      if (!newSubjectInput.value.trim()) {
+        showFieldAlert("Please enter a new subject name.", newSubjectInput);
+        return false;
+      }
+    }
+  }
+
+  if (stepIndex === 2) {
+    if (!resourceTypeSelect.value) {
+      showFieldAlert("Please select a resource type.", resourceTypeSelect);
+      return false;
+    }
+
+    const resourceType = resourceTypeSelect.value;
+    const urlValue = document.getElementById("url").value.trim();
+    const fileValue = document.getElementById("file").files.length;
+
+    if (["video", "book", "external"].includes(resourceType) && !urlValue) {
+      showFieldAlert("Please enter the URL for this resource.", document.getElementById("url"));
+      return false;
+    }
+
+    if (["handwritten", "assignment", "project", "lab"].includes(resourceType) && !fileValue) {
+      showFieldAlert("Please upload a file for this resource type.", document.getElementById("file"));
       return false;
     }
   }
@@ -450,13 +493,17 @@ function showFieldAlert(message) {
   const successOverlay = document.getElementById("successOverlay");
 
   wizardForm.addEventListener("submit", e => {
+    if (!validateStep(2)) {
+      e.preventDefault();
+      return;
+    }
+
     e.preventDefault();
 
-
     const submitBtn = wizardForm.querySelector("button[type='submit']");
-submitBtn.disabled = true;
-submitBtn.textContent = "Uploading…";
-submitBtn.style.opacity = "0.7";
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Uploading…";
+    submitBtn.style.opacity = "0.7";
 
 
     const xhr = new XMLHttpRequest();
