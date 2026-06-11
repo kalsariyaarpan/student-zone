@@ -13,6 +13,13 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 # Install PHP dependencies first
 RUN composer install --no-dev --optimize-autoloader
 
+
+RUN mkdir -p storage/framework/sessions
+RUN mkdir -p storage/framework/cache
+RUN mkdir -p storage/framework/views
+RUN chmod -R 775 storage bootstrap/cache
+
+
 # Install Node.js
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
 RUN apt-get install -y nodejs
