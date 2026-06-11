@@ -5,7 +5,7 @@
   <!-- Preloader -->
   {{-- <div id="preloader"></div> --}}
    
-
+{{-- 
   <div id="intro-loader">
     <div class="loader-content">
       <div class="logo-orb">
@@ -45,7 +45,7 @@
         content.classList.add('show');      // fade in site
       }
     }
-  </script>
+  </script> --}}
 
 
   {{-- <!-- Vendor JS Files -->
