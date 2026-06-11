@@ -5,7 +5,7 @@
   <!-- Preloader -->
   {{-- <div id="preloader"></div> --}}
    
-{{-- 
+
   <div id="intro-loader">
     <div class="loader-content">
       <div class="logo-orb">
@@ -28,9 +28,9 @@
       </button>
     </div>
   </div>
- --}}
+
   
-  {{-- <script>
+  <script>
     // Automatically hide intro after 3.2 seconds
     window.addEventListener('load', () => {
       setTimeout(hideIntro, 3200);
@@ -45,7 +45,7 @@
         content.classList.add('show');      // fade in site
       }
     }
-  </script> --}}
+  </script>
 
 
   {{-- <!-- Vendor JS Files -->
