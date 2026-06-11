@@ -16,6 +16,19 @@ use App\Http\Controllers\NoteController;
 |--------------------------------------------------------------------------
 */
 
+
+Route::get('/session-test', function () {
+    session(['test' => 'working']);
+
+    return response()->json([
+        'session_id' => session()->getId(),
+        'session_value' => session('test'),
+    ]);
+});
+
+
+
+
 Route::get('/', function () {
     return view('index');
 })->name('home');
