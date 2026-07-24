@@ -9,6 +9,7 @@ use App\Http\Controllers\FieldController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\NoteController;
+// use Illuminate\Support\Facades\Session;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,14 +19,10 @@ use App\Http\Controllers\NoteController;
 
 
 Route::get('/session-test', function () {
-    session(['test' => 'working']);
+    Session::put('counter', Session::get('counter', 0) + 1);
 
-    return response()->json([
-        'session_id' => session()->getId(),
-        'session_value' => session('test'),
-    ]);
+    return Session::get('counter');
 });
-
 
 
 
