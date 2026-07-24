@@ -9,7 +9,8 @@ use App\Http\Controllers\FieldController;
 use App\Http\Controllers\ResourceController;
 use App\Http\Controllers\ExploreController;
 use App\Http\Controllers\NoteController;
-// use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,13 +18,22 @@ use App\Http\Controllers\NoteController;
 |--------------------------------------------------------------------------
 */
 
-
+//temp start
 Route::get('/session-test', function () {
-    Session::put('counter', Session::get('counter', 0) + 1);
+    session(['counter' => session('counter', 0) + 1]);
 
-    return Session::get('counter');
+    return session('counter');
 });
 
+
+
+Route::get('/cookie-test', function (Request $request) {
+    return response()->json([
+        'session_id' => $request->session()->getId(),
+        'csrf_token' => csrf_token(),
+    ]);
+});
+// end
 
 
 Route::get('/', function () {
