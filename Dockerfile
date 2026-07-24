@@ -1,38 +1,54 @@
-    FROM php:8.2-cli
+FROM php:8.2-cli
 
-    WORKDIR /app
+# Set working directory
+WORKDIR /app
 
-    COPY . .
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    git \
+    unzip \
+    zip \
+    curl \
+    libzip-dev \
+    && docker-php-ext-install pdo pdo_mysql zip \
+    && rm -rf /var/lib/apt/lists/*
 
-    RUN apt-get update && apt-get install -y \
-        unzip git curl libzip-dev zip \
-        && docker-php-ext-install zip pdo pdo_mysql
+# Install Composer
+COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-    COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+# Copy project
+COPY . .
 
-    # Install PHP dependencies first
-    RUN composer install --no-dev --optimize-autoloader
+# Install PHP dependencies
+RUN composer install \
+    --no-dev \
+    --optimize-autoloader \
+    --no-interaction
 
-    RUN mkdir -p storage/framework/sessions
-    RUN mkdir -p storage/framework/cache
-    RUN mkdir -p storage/framework/views
-    RUN chmod -R 775 storage bootstrap/cache
+# Install Node.js
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
-    # RUN php artisan config:clear 
-    # RUN php artisan cache:clear 
-    # RUN php artisan route:clear
-    # RUN php artisan view:clear 
-    # RUN php artisan optimize
+# Install frontend dependencies
+RUN npm install
 
+# Build Vite assets
+RUN npm run build
 
-    RUN php artisan optimize:clear
+# Create Laravel directories
+RUN mkdir -p storage/framework/cache
+RUN mkdir -p storage/framework/sessions
+RUN mkdir -p storage/framework/views
+RUN mkdir -p bootstrap/cache
 
-    # Install Node.js
-    RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
-    RUN apt-get install -y nodejs
+# Give write permission
+RUN chmod -R 777 storage bootstrap/cache
 
-    # Build Vite after vendor exists
-    RUN npm install
-    RUN npm run build
+# Clear all Laravel caches
+RUN php artisan optimize:clear
 
-    CMD php artisan serve --host=0.0.0.0 --port=${PORT:-10000}
+# Expose Render port
+EXPOSE 10000
+
+# Start Laravel
+CMD php artisan serve --host=0.0.0.0 --port=${PORT:-10000}
