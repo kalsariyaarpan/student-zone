@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\URL;
 
@@ -21,7 +22,12 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         if (app()->environment('production')) {
-            config(['session.driver' => 'database']);
+            try {
+                config(['session.driver' => Schema::hasTable('sessions') ? 'database' : 'file']);
+            } catch (\Throwable $e) {
+                config(['session.driver' => 'file']);
+            }
+
             URL::forceScheme('https');
         }
 
