@@ -41,7 +41,6 @@ login
 
   <form id="loginForm" action="{{ route('login') }}" method="POST" novalidate>
     @csrf
-
     <div class="auth-input">
       <label>Username or Email</label>
       <input type="text" name="username" placeholder="Email / Username  " id="username" />
