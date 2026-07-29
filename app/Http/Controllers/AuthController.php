@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Throwable;
 
 class AuthController extends Controller
 {
@@ -18,47 +19,45 @@ class AuthController extends Controller
 
         public function login(Request $request)
         {
-            // Validate input
-            $request->validate([
-                'username' => 'required|string', // username OR email
-                'password' => 'required|string',
-            ]);
+            try {
+                $request->validate([
+                    'username' => 'required|string',
+                    'password' => 'required|string',
+                ]);
 
-            // Find user by email OR username
-            $user = RegisterUser::where('email', $request->username)
-                        ->orWhere('username', $request->username)
-                        ->first();
+                $user = RegisterUser::where('email', $request->username)
+                    ->orWhere('username', $request->username)
+                    ->first();
 
-            if (!$user) {
-                return back()->with('error', 'No account found with this email/username.');
+                if (!$user) {
+                    return redirect()->route('login', ['error' => 'No account found with this email/username.']);
+                }
+
+                if (!Hash::check($request->password, $user->password)) {
+                    return redirect()->route('login', ['error' => 'Incorrect password. Please try again.']);
+                }
+
+                Auth::login($user);
+
+                return redirect('/');
+            } catch (Throwable $e) {
+                report($e);
+
+                return redirect()->route('login', ['error' => 'Unable to log in right now.']);
             }
-
-            // Check password
-            if (!Hash::check($request->password, $user->password)) {
-                return back()->with('error', 'Incorrect password. Please try again.');
-            }
-
-            // Correct → Login
-            Auth::login($user);
-
-            return redirect('/')->with('success', 'Logged in successfully!');
         }
 
     public function logout(Request $request)
     {
-        Auth::logout(); // Logs out the user
-        $request->session()->invalidate(); // Invalidate session
-        $request->session()->regenerateToken(); // CSRF token protection
+        Auth::logout();
 
-    return redirect('/')->with('success', 'Logged out successfully.');
+        return redirect('/');
     }
 
 
     public function store(Request $request)
     {
-    
         dd($request->all());
-    
     }
 
     

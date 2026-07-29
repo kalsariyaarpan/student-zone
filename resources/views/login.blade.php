@@ -12,27 +12,27 @@ login
   <h2>Hello Student</h2>
 
   {{-- Alerts (Backend) --}}
- @if(session('success'))
+  @if(request('success'))
 <div class="aurora-middle success" data-time="4200">
     <div class="aurora-glow"></div>
 
     <div class="aurora-card">
         <div class="aurora-icon">✔</div>
         <h3>Success</h3>
-        <p>{{ session('success') }}</p>
+        <p>{{ request('success') }}</p>
         <div class="aurora-progress"></div>
     </div>
 </div>
 @endif
 
-@if(session('error'))
+@if(request('error'))
 <div class="aurora-middle error" data-time="4200">
     <div class="aurora-glow"></div>
 
     <div class="aurora-card">
         <div class="aurora-icon">🔒</div>
         <h3>Login Required</h3>
-        <p>{{ session('error') }}</p>
+        <p>{{ request('error') }}</p>
         <div class="aurora-progress"></div>
     </div>
 </div>

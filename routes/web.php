@@ -20,17 +20,15 @@ use Illuminate\Http\Request;
 
 //temp start
 Route::get('/session-test', function () {
-    session(['counter' => session('counter', 0) + 1]);
-
-    return session('counter');
+    return response()->json(['ok' => true]);
 });
 
 
 
 Route::get('/cookie-test', function (Request $request) {
     return response()->json([
-        'session_id' => $request->session()->getId(),
-        'csrf_token' => csrf_token(),
+        'status' => 'ok',
+        'app' => config('app.name'),
     ]);
 });
 // end

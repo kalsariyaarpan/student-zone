@@ -26,6 +26,12 @@ register
       </div>
   @endif
 
+    @if(request('error'))
+      <div class="alert alert-danger" style="padding:10px;">
+        <p style="margin:0;color:rgb(230,100,100)">{{ request('error') }}</p>
+      </div>
+    @endif
+
   <form id="registerForm" action="{{ route('register.store') }}" method="POST" novalidate>
     @csrf
 

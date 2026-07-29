@@ -172,25 +172,29 @@ class RegisterUserController extends Controller
 
 public function store(Request $request)
 {
-    $validated = $request->validate([
-        'username'    => 'required|string|max:50|unique:register_users,username',
-        'first_name'  => 'required|string|max:50',
-        'last_name'   => 'required|string|max:50',
-        'email'       => 'required|email|unique:register_users,email',
-        'password'    => 'required|string|min:6|confirmed',
-    ]);
+    try {
+        $validated = $request->validate([
+            'username'    => 'required|string|max:50|unique:register_users,username',
+            'first_name'  => 'required|string|max:50',
+            'last_name'   => 'required|string|max:50',
+            'email'       => 'required|email|unique:register_users,email',
+            'password'    => 'required|string|min:6|confirmed',
+        ]);
 
-    RegisterUser::create([
-        'username'    => $validated['username'],
-        'first_name'  => $validated['first_name'],
-        'last_name'   => $validated['last_name'],
-        'email'       => $validated['email'],
-        'password'    => Hash::make($validated['password']),
-    ]);
+        RegisterUser::create([
+            'username'    => $validated['username'],
+            'first_name'  => $validated['first_name'],
+            'last_name'   => $validated['last_name'],
+            'email'       => $validated['email'],
+            'password'    => Hash::make($validated['password']),
+        ]);
 
-    return redirect()
-        ->route('login')
-        ->with('success', 'Account created successfully! You can now log in.');
+        return redirect()->route('login', ['success' => 'Account created successfully! You can now log in.']);
+    } catch (\Throwable $e) {
+        report($e);
+
+        return redirect()->route('register', ['error' => 'Unable to create the account right now.']);
+    }
 }
 
 
