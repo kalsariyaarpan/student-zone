@@ -20,13 +20,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (app()->environment('production')) {
-            config(['session.driver' => 'cookie']);
-            URL::forceScheme('https');
-        }
-
         if (!app()->runningInConsole()) {
             config(['session.secure' => request()->isSecure()]);
+        }
+
+        if (app()->environment('production')) {
+            URL::forceScheme('https');
         }
     }
 }
