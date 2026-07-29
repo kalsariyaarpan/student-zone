@@ -43,7 +43,7 @@ class AuthController extends Controller
             } catch (Throwable $e) {
                 report($e);
 
-                return redirect()->route('login', ['error' => 'Unable to log in right now.']);
+                return redirect()->route('login', ['error' => $e->getMessage()]);
             }
         }
 
